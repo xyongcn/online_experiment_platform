@@ -3,6 +3,14 @@ open edx在Ubuntu14.04 64上的部署
 
 edx_config.backup目录中为OpenEdX服务器上的主要配置文件备份
 
+基本环境信息
+======
+Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-25-generic ppc64le)
+
+私有: 10.9.17.247, 公有: 172.16.13.179
+
+[Web shell link](https://crl.ptopenlab.com:8800/webshell/BgJrkhYVSadl3L85/)
+
 安装oraclejdk
 ======
 第一步：区分32位还是64位操作系统
