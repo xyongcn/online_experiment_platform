@@ -45,16 +45,9 @@ OpenEdX,Gitlab,idp目录包含了我们所使用的所有相关配置文件(密�
     //add the following code
     ServerName idp.edx.org
     
-2.2 jdk(oracle jdk--officially recommended):
+2.2 jdk
 
-    sudo apt-get install python-software-properties
-    sudo add-apt-repository ppa:webupd8team/java
-    sudo apt-get update
-    sudo apt-get install oracle-java7-installer
-    
-configure jdk
-
-    update-alternatives --config java
+IBM的ppc自带java-7-openjdk-ppc64el,无需额外安装
     
     
 2.3 idp:
@@ -69,7 +62,7 @@ configure jdk
     download the source
     unzip shibboleth-identityprovider-2.4.4-bin.zip
     cd shibboleth-identityprovider-2.4.4
-    JAVA_HOME=/usr/lib/jvm/java-7-oracle ./install.sh
+    JAVA_HOME=/usr/lib/jvm/java-7-openjdk-ppc64el ./install.sh
     chown -R tomcat6:tomcat6 /opt/shibboleth-idp
 
 访问idp.edx.org:8080//idp/profile/Status,若一切正常,可看到ok
