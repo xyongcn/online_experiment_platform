@@ -96,7 +96,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 在配置前,请使用test_ldap.py(需要执行sudo apt-get install python-ldap安装ldap包)保证LDAP正常工作
 
 	vi handler.xml
-	//add the following code
+	//uncomment the following code
 	<!--  Username/password login handler -->
 	<ph:LoginHandler xsi:type="ph:UsernamePassword"
 		jaasConfigurationLocation="file:///opt/shibboleth-idp/conf/login.config">
