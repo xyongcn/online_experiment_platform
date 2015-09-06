@@ -135,6 +135,15 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 	<afp:AttributeRule attributeID="eppn">
 	    <afp:PermitValueRule xsi:type="basic:ANY" />
 	</afp:AttributeRule>
+	
+	vi login.config
+	//uncomment the following code and modify vars
+	edu.vt.middleware.ldap.jaas.LdapLoginModule required
+        ldapUrl="ldap://192.168.1.116:389"
+        baseDn="ou=Users,dc=openedx,dc=com"
+        ssl="false"
+        //userFilter="uid={0}";
+        userField="uid";
 
 修改attribute-resolver.xml中的ldapURL,baseDN,以及管理员名称,密码
 
