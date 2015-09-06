@@ -96,6 +96,32 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 在配置前,请使用test_ldap.py(需要执行sudo apt-get install python-ldap安装ldap包)保证LDAP正常工作
 
 	vi handler.xml
+	
+	//add the following code
+	<resolver:AttributeDefinition xsi:type="ad:Simple" id="uid" sourceAttributeID="uid">
+            <resolver:Dependency ref="myLDAP" />
+            <resolver:AttributeEncoder xsi:type="enc:SAML1String" name="urn:mace:dir:attribute-def:uid" />
+            <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:0.9.2342.19200300.100.1.1" friendlyName="uid" />
+        </resolver:AttributeDefinition>
+
+        <resolver:AttributeDefinition xsi:type="ad:Simple" id="email" sourceAttributeID="mail">
+            <resolver:Dependency ref="myLDAP" />
+            <resolver:AttributeEncoder xsi:type="enc:SAML1String" name="urn:mace:dir:attribute-def:mail" />
+            <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:0.9.2342.19200300.100.1.3" friendlyName="mail" />
+        </resolver:AttributeDefinition>
+
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="commonName" sourceAttributeID="cn">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML1String" name="urn:mace:dir:attribute-def:cn" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:2.5.4.3" friendlyName="cn" />
+    </resolver:AttributeDefinition>
+
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="eppn" sourceAttributeID="eduPersonPrincipalName">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML1String" name="urn:mace:dir:attribute-def:eduPersonPrincipalName" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" friendlyName="eppn" />
+    </resolver:AttributeDefinition>
+	
 	//uncomment the following code
 	<!--  Username/password login handler -->
 	<ph:LoginHandler xsi:type="ph:UsernamePassword"
