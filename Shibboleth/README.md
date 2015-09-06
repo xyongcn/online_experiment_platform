@@ -120,12 +120,21 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
     	
     	vi attribute-filter.xml
     	//add the following code
+    	<afp:AttributeRule attributeID="uid">
+    	    <afp:PermitValueRule xsi:type="basic:ANY" />
+        </afp:AttributeRule>
+
     	<afp:AttributeRule attributeID="email">
 	    <afp:PermitValueRule xsi:type="basic:ANY" />
     	</afp:AttributeRule>
 
 	<afp:AttributeRule attributeID="commonName">
 	    <afp:PermitValueRule xsi:type="basic:ANY" />
+	</afp:AttributeRule>
+
+	<afp:AttributeRule attributeID="eppn">
+	    <afp:PermitValueRule xsi:type="basic:ANY" />
+	</afp:AttributeRule>
 
 修改attribute-resolver.xml中的ldapURL,baseDN,以及管理员名称,密码
 
