@@ -105,7 +105,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 	</ph:LoginHandler></code>
 		
 	vi attribute-resolver.xml
-	//add the following code
+	//uncomment the following code and modify vars
 	<resolver:DataConnector id="myLDAP" xsi:type="dc:LDAPDirectory"
         ldapURL="ldap://<your ldap url>" 
         baseDN="ou=Users,dc=openedx,dc=com" 
@@ -118,7 +118,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
         </dc:FilterTemplate>
     	</resolver:DataConnector>
     	
-    	vi attrbute-filter.xml
+    	vi attribute-filter.xml
     	//add the following code
     	<afp:AttributeRule attributeID="email">
 	    <afp:PermitValueRule xsi:type="basic:ANY" />
