@@ -147,6 +147,8 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 
 修改attribute-resolver.xml中的ldapURL,baseDN,以及管理员名称,密码
 
+使用idp目录下的bin/aacli.sh可测试idp与ldap的连接是否正常,详细见调试帮助
+
 3.SP配置(Gitlab,OpenEdX部署SP都需要此步骤作为前提)
 
 3.1.安装
