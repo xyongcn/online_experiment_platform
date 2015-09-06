@@ -93,7 +93,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 		
 2.3.3 配置LDAP验证
 
-在配置前,请使用test_ldap.py保证LDAP正常工作
+在配置前,请使用test_ldap.py(需要执行sudo apt-get install python-ldap安装ldap包)保证LDAP正常工作
 
 	vi handler.xml
 	//add the following code
