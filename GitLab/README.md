@@ -10,7 +10,7 @@ git_config.backup目录中为Gitlab服务器上的配置文件备份
 
 1.设置gitlab在/os_gitlab子目录中访问
 
-以下为官方提供的需要修改的配置:()
+以下为官方提供的需要修改的配置:(/opt/gitlab/embedded/service/gitlab-rails/config)
 
     1) In your application.rb file: config.relative_url_root = "/os_gitlab"
     2) In your gitlab.yml file: relative_url_root: /os_gitlab
@@ -20,13 +20,14 @@ git_config.backup目录中为Gitlab服务器上的配置文件备份
     
 在新版的gitlab中,以上配置文件中除了5之外都无法直接修改,每次reconfigure之后会被覆盖,官方也没有再gitlab.rb中提供相关配置
 
-需要直接修改模板,模板目录为
+需要直接修改模板,模板目录为 /opt/gitlab/embedded/cookbooks/gitlab/templates/default/
 
-修改完毕后运行
+找到模板目录中对应的配置文件的模板,修改完毕后运行
 
-    sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production
-    
-找到模板目录中对应的配置文件的模板,修改后sudo gitlab-ctl reconfigure即可
+    cd /opt/gitlab/embedded/service/gitlab-rails/
+    export PATH=/opt/gitlab/embedded/bin:$PATH
+    sudo -u git -H env PATH=$PATH && bundle exec rake assets:precompile RAILS_ENV=production
+    sudo gitlab-ctl reconfigure
 
 
 
