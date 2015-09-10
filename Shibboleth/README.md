@@ -85,6 +85,8 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 
     scp sp-metadata.xml username@idp-ip:/opt/shibboleth-idp/metadata
     
+    chown tomcat6:tomcat6 sp-metadata.xml 
+    
     vi /conf/relying-party.xml
     //add the following code
     <metadata:MetadataProvider xsi:type="FilesystemMetadataProvider"
