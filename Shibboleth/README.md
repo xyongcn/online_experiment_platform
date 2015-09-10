@@ -242,11 +242,26 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 3.2.3 配置属性映射文件attribute-map.xml
 
     vi attribute-map.xml
+    //comment the following code
+    <!--
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" id="eppn">
+        <AttributeDecoder xsi:type="ScopedAttributeDecoder"/>
+    </Attribute>
+    -->
     //add the following code
+    <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" id="eppn"/>
     <Attribute name="urn:oid:2.5.4.3" id="cn"/>
     <Attribute name="urn:oid:0.9.2342.19200300.100.1.3" id="mail"/>
+
+3.2.4
+
+    vi attribute-policy.xml
+    //comment the following code if you use eppn
+    <afp:AttributeRule attributeID="eppn">
+        <afp:PermitValueRuleReference ref="ScopingRules"/>
+    </afp:AttributeRule>
     
-3.2.4 使用shib来保护资源(这一步仅做参考,实际部署时Gitlab与Nginx略有不同)
+3.2.5 使用shib来保护资源(这一步仅做参考,实际部署时Gitlab与Nginx略有不同)
 
     vi /etc/apache2/httpd.conf
     //add the following code
