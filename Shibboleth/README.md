@@ -289,6 +289,14 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 
 * 先按步骤3安装SP,保证SP正常工作,将Gitlab/git_apache2目录中的文件拷贝至/etc/apache2/目录中覆盖(注意修改权限,与原文件保持一致)
 
+ 	//激活使用的apache模块
+ 	
+  	a2enmod proxy
+
+	a2enmod rewrite
+
+	a2enmod headers
+
 * 配置Gitlab与SP连接 
 
 ```
