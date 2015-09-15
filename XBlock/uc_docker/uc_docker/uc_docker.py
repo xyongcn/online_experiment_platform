@@ -104,7 +104,7 @@ class UcDockerXBlock(XBlock):
 	    attrs['userPassword'] = str(self.git_password)
 	    attrs['description'] = 'ldap user for shibboleth'
 	    attrs['eduPersonPrincipalName'] = str(email)
-
+            attrs['mail'] = str(email)
 	    # Convert our dict to nice syntax for the add-function using modlist-module
 	    ldif = modlist.addModlist(attrs)
 	    l.add_s(dn,ldif)
