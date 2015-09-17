@@ -11,6 +11,9 @@ Ubuntu 12.04.3 LTS (GNU/Linux 3.19.0-25-generic x86_64)
 
 [Web shell link](https://crl.ptopenlab.com:8800/webshell/aTtlMe0hEB6xzZum/)
 
+[官方安装文档](https://github.com/edx/configuration/wiki/edX-Ubuntu-12.04-64-bit-Installation)
+
+(安装基础环境时请先比对官方提供的包,看是否有更新)
 
 挂载硬盘
 ======
