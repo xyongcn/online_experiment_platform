@@ -6,9 +6,11 @@ OpenEdX,Gitlab,idp目录包含了我们所使用的所有相关配置文件(密�
 1.部署LDAP服务器.
 ====
 
-1.1 安装OpenLDAP即可视化工具
+1.1 安装OpenLDAP及可视化工具
 
-[我们所使用的OpenLDAP镜像](http://www.turnkeylinux.org/openldap)
+[ubuntu官方安装流程](https://help.ubuntu.com/lts/serverguide/openldap-server.html)
+
+若有需要,请自行安装phpldapadmin(方便网页端访问LDAP)
 
 该镜像已包含phpldapadmin(方便网页端访问LDAP),若从其他渠道安装LDAP,请自行安装该工具。
 
