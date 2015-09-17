@@ -1,94 +1,67 @@
-open edx在Ubuntu14.04 64上的部署
+open edx在Ubuntu12.04 64上的部署
 ======
 
 edx_config.backup目录中为OpenEdX服务器上的主要配置文件备份
 
 基本环境信息
 ======
-Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-25-generic ppc64le)
+Ubuntu 12.04.3 LTS (GNU/Linux 3.19.0-25-generic x86_64)
 
-私有: 10.9.17.247, 公有: 172.16.13.179
+私有: 10.9.19.126, 公有: 172.16.14.147
 
-[Web shell link](https://crl.ptopenlab.com:8800/webshell/BgJrkhYVSadl3L85/)
+[Web shell link](https://crl.ptopenlab.com:8800/webshell/aTtlMe0hEB6xzZum/)
 
-安装oraclejdk
+
+挂载硬盘
 ======
-第一步：区分32位还是64位操作系统
-先确定你的ubuntu linux是32位还是64位的，方法很多，这里介绍一种即可。
+IBM提供的机器硬盘大小为20G,另附一个130G未格式化的硬盘,openedx需要25G以上空间,所以先进行挂载
 
-    $uname -a
+(1)分区
 
-第二步：卸载OpenJDK
-先执行如下命令看是否安装了OpenJDK，如果已经安装，会显示java的信息。
-
-    $java -version
-
-如果安装了OpenJDK，可用如下方法全部卸载：
-
-    $sudo apt-get purge openjdk-\*
-
-第三步：下载Oracle JDK版本
-注：这里以Oracle 1.6 64位的为例
-进入 http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html
-，选择"Java SE Development Kit 6u45"，然后在新打开的页面点选接受"Accept License Agreement". 接受之后，选择" jdk-6u45-linux-x64.bin"即可进行下载。如果你没有登录，系统会先转到登录页面，输入你在Oracle网站注册的用户名和密码即可。
-
-第三步：安装Oracle JDK
-
-(1) 
-创建java目录
-
-    $ sudo mkdir -p /usr/local/java
+    sudo fdisk /dev/vdb
     
-将你下载的jdk-6u45-linux-x64.bin拷贝至/usr/local/java目录
+按照提示输入m->n(add a new partition)->e(extended)->1(1个分区)
 
-    $ cd /usr/local/java
-    $ sudo cp /home/dennis/Downloads/jdk-6u45-linux-x64.bin .
+输入柱面号时直接回车使用默认数值即可,完成后输入w保存
 
-(2) 
-解压bin文件
+如下命令会显示当前分区:
 
-    $ sudo chmod +x jdk-6u45-linux-x64.bin
-    $ sudo ./jdk-6u45-linux-x64.bin
-    $ sudo rm -rf jdk-6u45-linux-x64.bin
-
-第四步：配置Orache JDK
-
-(1) 
-配置JAVA_HOME和PATH环境变量
-
-    $ sudo vi /etc/profile
+    sudo fdisk -lu
     
-在该文件的末尾加上如下部分：
+(2)格式化并挂载
 
-    JAVA_HOME=/usr/local/java/jdk1.6.0_45
-    PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
-    export JAVA_HOME
-    export PATH
-
-(2) 
-配置ubuntu的JDK和JRE的位置
-
-    $ sudo update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.6.0_45/bin/java" 1
-    $ sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/java/jdk1.6.0_45/bin/javac" 1
-    $ sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.6.0_45/bin/javaws" 1
-
-(3) 
-配置Oracle为系统默认JDK/JRE
-
-    $ sudo update-alternatives --set java /usr/local/java/jdk1.6.0_45/bin/java
-    $ sudo update-alternatives --set javac /usr/local/java/jdk1.6.0_45/bin/javac
-    $ sudo update-alternatives --set javaws /usr/local/java/jdk1.6.0_45/bin/javaws
-
-配置完成后，执行如下命令使其立即生效。
-
-    $ . /etc/profile
+    sudo mkfs -t ext4 /dev/vdb
+    mkdir /devdata
+    sudo mount -t ext4 /dev/vdb /devdata
     
-再次执行"java -version"显示如下：
+(3)配置硬盘在启动时自动挂载
 
-    dennis@dubuntu1404:~$ java -version
-    java version "1.6.0_45"
-    Java(TM) SE Runtime Environment (build 1.6.0_45-b06)
-    Java HotSpot(TM) 64-Bit Server VM (build 20.45-b01, mixed mode)
+    //记录该命令输出的/dev/vdb对应的uuid
+    ls -all /dev/disk/by-uuid
+    
+    vi /etc/fstab
+    //add the following code
+    UUID=<UUID>     /devdata     ext4     defaults     0     3
+
+修改umask
+======
+IBM默认的umask是0077,创建的文件或目录不允许除owner之外的用户读,在安装过程中会出现权限问题
+
+暂时性修改umask,重启后失效
+
+    umask 0002
+    
+永久修改
+
+    vi /etc/pam.d/common-session
+    //uncomment the following code
+    session optional pam_umask.so
+
+在以下3个文件中添加 umask 002  
+
+    vi /etc/login.defs
+    vi ~/.bashrc
+    vi ~/.profile
 
 开始部署edx
 ======
@@ -102,7 +75,7 @@ Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-25-generic ppc64le)
 (2)
 安装所需的软件,pip为包管理系统;使用virtualenv为python开发创建一个隔离的环境
 
-    sudo apt-get install -y build-essential software-properties-common python-software-properties curl git-core libxml2-dev      libxslt1-dev libfreetype6-dev python-pip python-apt python-dev
+    sudo apt-get install -y build-essential software-properties-common python-software-properties curl git-core libxml2-dev libxslt1-dev libfreetype6-dev python-pip python-apt python-dev libxmlsec1-dev swig
     sudo pip install --upgrade pip
     sudo pip install --upgrade virtualenv
 
@@ -144,7 +117,30 @@ Ubuntu 14.04.3 LTS (GNU/Linux 3.19.0-25-generic ppc64le)
 
     cd /var/tmp/configuration/playbooks && sudo ansible-playbook -c local ./edx_sandbox.yml -i "localhost,"
     
-可能有某个工具安装失败,如果出现则手动安装该工具后再重新安装
+提供如下命令选项 
+
+--list-tasks 列出所有安装任务
+
+--start-at-task="where you failed" 从指定位置开始安装,有些任务会依赖于前几个任务,不能直接从该任务开始
+    
+在安装过程中若gem或pip获取源失败,需要更改至国内源
+
+gem源:
+
+    vi /edx/app/edxapp/edx-platform/Gemfile
+    //将源替换成http://ruby.taobao.org
+    
+pip源(豆瓣的源效果最好,但也不是很稳定,需要多试几次)
+
+    vi <安装目录>/playbooks/roles/common/default/main.yml
+    //COMMON_PYPI_MIRROR_URL替换成http://pypi.douban.com/simple
+    
+elasticsearch获取失败
+
+    vi <安装目录>/playbooks/roles/elasticsearch/default/main.yml
+    //将elasticsearch的下载地址从https改为http
+    
+注意:以上修改完毕后若从头安装,则修改会被覆盖,需要使用--start-at-task 选项进行安装
 
 (7)
 安装完成后,在本地的80端口访问lms,18010端口访问studio
