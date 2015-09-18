@@ -5,6 +5,8 @@
 
 [官方配置文档](https://github.com/woboq/woboq_codebrowser/)
 
+[Woboq配置及使用](https://github.com/xyongcn/code-viewer/blob/master/document_by_zyu/woboq%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8.md)
+
 ###2.创建代码以及浏览页面的存放目录
 
     sudo -u www-data bash
