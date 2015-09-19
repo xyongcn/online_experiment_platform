@@ -13,8 +13,8 @@
     cd <path of xblock-codebrowser>
     ./scripts/create_dir.sh
     cp -r your_woboq_codebrowser_file/* /edx/var/edxapp/woboq_codebrowser/
-    mv ./scripts/generator.sh /edx/var/edxapp/staticfiles/xblock-script/
-    mv ./scripts/make.sh /edx/var/edxapp/staticfiles/xblock-script/
+    cp ./scripts/generator.sh /edx/var/edxapp/staticfiles/xblock-script/
+    cp ./scripts/make.sh /edx/var/edxapp/staticfiles/xblock-script/
 
 注意:必须确保www-data用户拥有scripts中脚本的执行权限以及所创建目录的读写权限
 
