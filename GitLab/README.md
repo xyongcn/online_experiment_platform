@@ -4,6 +4,8 @@
 
 git_config.backup目录中为Gitlab服务器上的配置文件备份
 
+[API使用说明](https://github.com/gitlabhq/gitlabhq/tree/master/doc/api)
+
 安装完成后,做如下修改:
 
 [user.rb备份](https://github.com/rainymoon911/online_experiment_platform/blob/master/GitLab/git_config.backup/users.rb)
