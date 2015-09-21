@@ -335,7 +335,19 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 [官方说明](https://github.com/edx/configuration/wiki/Setting-Up-External-Authentication)
 
 * 先按步骤３配置SP
-* 将OpenEdX/edx_apache2目录中的文件拷贝至/etc/apache2/目录中覆盖(注意修改权限,与原文件保持一致),并将edx_apache2/sites-available/lms中的<your domain of OpenEdX>改为OpenEdX的域名
+* 配置Apache2对照OpenEdX/edx_apache2目录中的文件对/etc/apache2中的配置文件进行修改
+
+	sudo apt-get install libapache2-mod-wsgi
+	sudo a2enmod wsgi
+	sudo service apache2 restart
+	cd /etc/apache2
+	vi ports.conf//将其中的80端口改为8080
+	cd /etc/apache2/sites-available
+	rm default
+	vi lms//内容参照OpenEdX/edx_apache2/sites-availabe/lms,修改域名即可
+	sudo a2ensite lms
+	/etc/init.d/apache2 restart
+
 * 复制/OpenEdX/edx_nginx/sites-available/lms 至 /etc/nginx/sites-available/
 * 重启Apache以及Nginx
 ```
