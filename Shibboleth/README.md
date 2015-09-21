@@ -296,6 +296,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
   		a2enmod proxy
 		a2enmod rewrite
 		a2enmod headers
+		a2enmod proxy_http
 
 * 配置Gitlab与SP连接 
 
