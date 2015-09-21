@@ -337,16 +337,16 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 * 先按步骤３配置SP
 * 配置Apache2对照OpenEdX/edx_apache2目录中的文件对/etc/apache2中的配置文件进行修改
 
-	sudo apt-get install libapache2-mod-wsgi
-	sudo a2enmod wsgi
-	sudo service apache2 restart
-	cd /etc/apache2
-	vi ports.conf//将其中的80端口改为8080
-	cd /etc/apache2/sites-available
-	rm default
-	vi lms//内容参照OpenEdX/edx_apache2/sites-availabe/lms,修改域名即可
-	sudo a2ensite lms
-	/etc/init.d/apache2 restart
+		sudo apt-get install libapache2-mod-wsgi
+		sudo a2enmod wsgi
+		sudo service apache2 restart
+		cd /etc/apache2
+		vi ports.conf//将其中的80端口改为8080
+		cd /etc/apache2/sites-available
+		rm default
+		vi lms//内容参照OpenEdX/edx_apache2/sites-availabe/lms,修改域名即可
+		sudo a2ensite lms
+		/etc/init.d/apache2 restart
 
 * 复制/OpenEdX/edx_nginx/sites-available/lms 至 /etc/nginx/sites-available/
 * 重启Apache以及Nginx
