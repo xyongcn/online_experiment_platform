@@ -20,7 +20,7 @@ git_config.backup目录中为Gitlab服务器上的配置文件备份
     4) In ../gitlab-shell/config.yml: gitlab_url: "http://127.0.0.1/os_gitlab"
     5) In lib/support/nginx/gitlab: do not use asset gzipping,remove block starting with "location = ^/(assets)/"
     
-在新版的gitlab中,以上配置文件中除了5之外都无法直接修改,每次reconfigure之后会被覆盖,官方也没有再gitlab.rb中提供相关配置
+在新版的gitlab中,以上配置文件中除了１,5之外都无法直接修改,每次reconfigure之后会被覆盖,官方也没有再gitlab.rb中提供相关配置
 
 需要直接修改模板,模板目录为 /opt/gitlab/embedded/cookbooks/gitlab/templates/default/
 
