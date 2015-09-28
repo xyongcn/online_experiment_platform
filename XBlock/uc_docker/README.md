@@ -17,3 +17,9 @@ db.codeview.save({username:"zyu_test"})
 ```
 
 ###3.uc_docker安装到后台后需要在后台进行编辑,创建用户可见的Docker,Docker名为ucore_lab,其余默认即可
+
+```
+sudo apt-get install python-ldap
+```
+
+
