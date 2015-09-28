@@ -18,9 +18,7 @@
     
 * edx-platform/cms/envs/common.py中把
 
-        'ALLOW_ALL_ADVANCED_COMPONENTS': False,
-        改成：
-        'ALLOW_ALL_ADVANCED_COMPONENTS': True,
+        'ALLOW_ALL_ADVANCED_COMPONENTS'以及 'ADVANCED_SECURITY'设置为True
     
 
 ###XBlock安装完成后需重启服务:
