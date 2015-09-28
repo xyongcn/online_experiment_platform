@@ -147,3 +147,23 @@ elasticsearch获取失败
 
 (7)
 安装完成后,在本地的80端口访问lms,18010端口访问studio
+
+(8)
+安装XBlock环境
+
+    git clone https://github.com/edx/XBlock.git
+    source /edx/app/edxapp/edxapp_env
+    cd XBlock
+    sudo pip install -r requirements.txt
+    
+(9)
+安装XBlock开发环境(如果你要自己写XBlock的话)
+    
+    git clone https://github.com/edx/xblock-sdk.git cd xblock-sdk
+    mkvirtualenv xblock-sdk
+    cd xblock-sdk
+    pip install -r requirements.txt
+    python manage.py syncdb
+    python manage.py runserver 0.0.0.0:8000&
+    //浏览器访问本地8000端口即可看到XBlock的相关信息
+    //创建新Xblock请使用xblock-sdk中的script/startnew.py脚本
