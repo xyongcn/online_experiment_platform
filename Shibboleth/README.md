@@ -343,7 +343,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 		cd /etc/apache2
 		vi ports.conf//将其中的80端口改为8080
 		cd /etc/apache2/sites-available
-		rm default
+		rm default(同时删去sites-enabled中对应的软链接)
 		vi lms//内容参照OpenEdX/edx_apache2/sites-availabe/lms,修改域名即可
 		sudo a2ensite lms
 		/etc/init.d/apache2 restart
