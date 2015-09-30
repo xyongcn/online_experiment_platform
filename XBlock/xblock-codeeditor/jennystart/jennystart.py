@@ -46,7 +46,7 @@ class JennystartXBlock(XBlock):
         conn.disconnect()
         
 	self.logger.info(username + " start edit")
-        if result:
+        if result and "view_file" in result:
             relative_path = result["view_file"]
 	    self.lab = result["lab"]
             self.file_path = base_path + student_id + relative_path
