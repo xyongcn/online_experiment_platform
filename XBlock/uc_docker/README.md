@@ -18,8 +18,10 @@ db.codeview.save({username:"zyu_test"})
 
 ###3.uc_docker安装到后台后需要在后台进行编辑,创建用户可见的Docker,Docker名为ucore_lab,其余默认即可
 
+###4.安装依赖包是python-ldap需要依赖环境,如下:
+
 ```
-sudo apt-get install python-ldap
+sudo apt-get install python-dev libldap2-dev libsasl2-dev libssl-dev
 ```
 
 
