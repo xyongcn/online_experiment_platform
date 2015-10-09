@@ -41,7 +41,7 @@ class GitLabUtil(object):
             return False, response.reason
 
     @staticmethod
-    def create_account(host, port, admin_token, name, user_name, email, password):
+    def create_account(host, port,  admin_token, name, user_name, email, password):
         print "git.create_account"
         http_client = None
         try:
@@ -113,12 +113,12 @@ class GitLabUtil(object):
         return result, message
 
     @staticmethod
-    def create_private_project(host, port, user_token, project_name):
-        print "git.create_private_project"
+    def create_project(host, port, user_token, import_url, project_name):
+        print "git.create_project"
         http_client = None
         try:
             url = "/api/v3/projects?private_token={0}".format(user_token)
-            params = urllib.urlencode({'name': project_name, 'visibility_level': 0})
+            params = urllib.urlencode({'name': project_name, 'import_url': import_url, 'visibility_level': 0})
             http_client = GitLabUtil.create_http_client(host, port, "POST", url, params)
             result, message = GitLabUtil.handle_response(http_client.getresponse())
         except Exception, e:

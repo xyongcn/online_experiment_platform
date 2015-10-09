@@ -23,6 +23,7 @@ class CodeBrowserBlock(XBlock):
     CONFIG = Config.CONFIG
     git_host = CONFIG["GIT"]["HOST"]
     git_port = CONFIG["GIT"]["PORT"]
+    edx_host = CONFIG["EDX"]["HOST"]
     
     LOG_FILE = '/var/www/gitlab_codebrowser.log'
     handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes = 1024*1024)
@@ -65,7 +66,7 @@ class CodeBrowserBlock(XBlock):
         """
         rsa_file = "/var/www/.ssh/id_rsa_" + student_id
 	if self.lab == "no_lab":
-            src = 'http://166.111.68.45:11133/static/codebrowser/notice.html'
+            src = 'http://' + self.edx_host + '/static/codebrowser/notice.html'
 	else:
 	    conn = pymongo.Connection('localhost', 27017)
 	    db = conn.test
@@ -76,7 +77,7 @@ class CodeBrowserBlock(XBlock):
 	    if result:
     		src = result["src_html"]
 	    else:
-	        src = 'http://166.111.68.45:11133/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'	
+	        src = 'http://' + self.edx_host + '/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'	
 
 	"""
 	pull the code from gitlab and generate the static html files
@@ -160,7 +161,7 @@ class CodeBrowserBlock(XBlock):
     	os.system("/edx/var/edxapp/staticfiles/xblock-script/generator.sh "  + student_id + " " + username + " " + lab)
     	self.lab = lab
 
-	src = 'http://166.111.68.45:11133/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'
+	src = 'http://' + self.edx_host + '/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'
 	conn = pymongo.Connection('localhost', 27017)
 	db = conn.test
 	codeview = db.codeview
@@ -190,7 +191,8 @@ class CodeBrowserBlock(XBlock):
 	
 	src_html = src
 	npos = src.find('/ucore_lab')
-	src = src[npos:-5]
+	end_pos = src.find('.html')
+	src = src[npos:end_pos]
 	npos = src.find('/lab')
 	seg1 = src[:npos]
 	seg2 = src[npos:]

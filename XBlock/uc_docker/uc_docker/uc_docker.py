@@ -35,6 +35,9 @@ class UcDockerXBlock(XBlock):
     git_host = CONFIG["GIT"]["HOST"]
     git_port = CONFIG["GIT"]["PORT"]
     git_admin_token = CONFIG["GIT"]["ADMIN_TOKEN"]
+    git_import_url = CONFIG["GIT"]["IMPORT_URL"]
+    git_project_name = CONFIG["GIT"]["PROJECT_NAME"]
+
     docker_host = CONFIG["DOCKER"]["HOST"]
     docker_url = CONFIG["DOCKER"]["REMOTE_API"]["URL"]
     docker_namespace = CONFIG["DOCKER"]["NAMESPACE"]
@@ -75,6 +78,7 @@ class UcDockerXBlock(XBlock):
             fragment.add_javascript(Util.load_resource("static/js/src/uc_lab.js"))
             fragment.initialize_js("UcDockerXBlock")
             return fragment
+	    return
 
         # student view in open-edx
         if self.is_new:
@@ -147,6 +151,36 @@ class UcDockerXBlock(XBlock):
 
             except Exception, ex:
                 return self.message_view("Error in uc_docker (gen ssh key)", ex, context)
+
+
+	    # get teacher id
+	    #result, message = GitLabUtil.get_user(self.git_host, self.git_port, self.git_teacher_token)
+	    #self.logger.info("get teacher id")
+	    #self.logger.info(result)
+	    #self.logger.info(message)
+            #if not result:
+            #    return self.message_view("Error in get teacher info")
+            #try:
+	    #    message = json.loads(message)
+            #    teacher_id = message["id"]
+            #except Exception:
+            #    return self.message_view("Error in uc_docker (load json string)", message, context)
+
+	    #add teacher to developer
+	    #result, message = GitLabUtil.add_project_developer(self.git_host, self.git_port, self.git_user_token, username, self.git_project_name, teacher_id)
+	    #self.logger.info("add developer result:")
+            #self.logger.info(result)
+            #self.logger.info(message)
+            #if not result:
+            #    return self.message_view("Error in uc_docker (add teacher to developer)", message, context)
+
+            result, message = GitLabUtil.create_project(self.git_host, self.git_port, self.git_user_token, self.git_import_url, self.git_project_name)
+            self.logger.info("add project result:")
+            self.logger.info(result)
+            self.logger.info(message)
+            if not result:
+                return self.message_view("Error in uc_docker (add project)", message, context)
+
 
             result, message = GitLabUtil.add_ssh_key(self.git_host, self.git_port, self.git_user_token, "uClassroom default", self.public_key)
             self.logger.info("add_ssh_key result:")

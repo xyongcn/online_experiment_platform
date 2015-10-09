@@ -34,7 +34,7 @@ class JennystartXBlock(XBlock):
         when viewing courses.
         """
 
-        student_id=self.runtime.anonymous_student_id
+        student_id = self.runtime.anonymous_student_id
         base_path="/edx/var/edxapp/staticfiles/ucore/"
 	real_user = self.runtime.get_real_user(student_id)
 	username = real_user.username

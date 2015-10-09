@@ -4,16 +4,18 @@ class Config:
         "GIT":
         {
             # GitLab's host and port, make sure open-edx can access
-            "HOST" : "192.168.1.62",
+            "HOST" : "10.9.18.24",
             "PORT" : 80,
-
+	    # fork the repo from Github or other supported websites
+	    "IMPORT_URL" : "https://github.com/chyyuu/ucore_os_lab",
+	    "PROJECT_NAME" : "ucore_lab",
             # GitLab admin account's token
-            "ADMIN_TOKEN": "Gysy4D6M1-B6sTNtyu2S",
+            "ADMIN_TOKEN": "XXXXXXXX",
 
             # Teacher account information, be used to create repo/project
             "TEACHER":
             {
-                "TOKEN": "yTzMzxy76bA3wizyUTHM"
+                "TOKEN": "XXXXXXXX"
             }
         },
 
@@ -42,9 +44,9 @@ class Config:
         },
 	"LDAP":
 	{
-	    "PRINCIPAL_NAME":"cn=admin,dc=openedx,dc=com",
+	    "PRINCIPAL_NAME":"cn=admin,dc=edx,dc=com",
 	    "PASSWORD"      :"p@ssw0rd",
-	    "LDAP_URL"      :"ldap://192.168.1.116:389",
-	    "BASE_DN"       :"ou=Users,dc=openedx,dc=com"
+	    "LDAP_URL"      :"ldap://10.9.17.245:389",
+	    "BASE_DN"       :"ou=Users,dc=edx,dc=com"
 	}
     }
