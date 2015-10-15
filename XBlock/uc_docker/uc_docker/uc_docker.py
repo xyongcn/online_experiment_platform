@@ -53,6 +53,9 @@ class UcDockerXBlock(XBlock):
     ldap_url = CONFIG["LDAP"]["LDAP_URL"]
     base_dn = CONFIG["LDAP"]["BASE_DN"]
 
+    mongo_admin = CONFIG["MONGO"]["ADMIN"]
+    mongo_pwd   = CONFIG["MONGO"]["PASSWORD"]
+
     docker_helper = DockerRawHelper(docker_host, docker_url, ca, cert, key)
 
     def student_view(self, context=None):
@@ -145,6 +148,7 @@ class UcDockerXBlock(XBlock):
                 self.save()
                 conn=pymongo.Connection('localhost', 27017)
                 db = conn.test
+	 	db.authenticate(self.mongo_pwd,self.mongo_pwd)
                 token=db.token
                 token.insert({"username":username,"token":message["private_token"],"password":self.git_password,"private_key":self.private_key,"public_key":self.public_key})
                 conn.disconnect()
@@ -291,6 +295,7 @@ ENTRYPOINT ["bash"]
         dockername=data["name"]
         conn = pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate(self.mongo_pwd,self.mongo_pwd)
         user = db.user
         result = user.find_one({"username":user_name, "dockername":dockername})
         conn.disconnect()
@@ -318,6 +323,7 @@ ENTRYPOINT ["bash"]
       
         conn=pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate(self.mongo_pwd,self.mongo_pwd)
         token=db.token
         result = token.find_one({"username":user_name})
         self.git_password=result["password"]
@@ -331,6 +337,7 @@ ENTRYPOINT ["bash"]
 
         conn = pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate(self.mongo_pwd,self.mongo_pwd)
         user = db.user
         user.insert({"username":user_name, "dockername":data["name"]})
         conn.disconnect()
@@ -351,6 +358,7 @@ ENTRYPOINT ["bash"]
 
         conn=pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate(self.mongo_pwd,self.mongo_pwd)
         token=db.token
         result = token.find_one({"username":user_name})
         self.git_password=result["password"]
@@ -376,6 +384,7 @@ ENTRYPOINT ["bash"]
 
         conn=pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate(self.mongo_pwd,self.mongo_pwd)
         token=db.token
         result = token.find_one({"username":user_name})
         self.git_password=result["password"]

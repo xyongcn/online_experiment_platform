@@ -11,6 +11,12 @@ class Config:
 	"EDX":
 	{
 	    "HOST" : "172.16.14.147"
+	},
+
+	"MONGO":
+	{
+	    "ADMIN"     :"edxapp",
+	    "PASSWORD"  :"p@ssw0rd"
 	}
     }
 

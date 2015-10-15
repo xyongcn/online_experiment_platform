@@ -41,6 +41,7 @@ class JennystartXBlock(XBlock):
         
         conn = pymongo.Connection('localhost', 27017)
         db = conn.test
+	db.authenticate("edxapp","p@ssw0rd")
         codeview = db.codeview
         result = codeview.find_one({"username":username})
         conn.disconnect()
@@ -90,6 +91,21 @@ class JennystartXBlock(XBlock):
         output=open(self.file_path)
         self.codeData =output.read()
         output.close()
+
+	#update view_file
+	student_id = self.runtime.anonymous_student_id
+        real_user = self.runtime.get_real_user(student_id)
+        username = real_user.username
+
+	conn = pymongo.Connection('localhost', 27017)
+        db = conn.test
+        db.authenticate("edxapp","p@ssw0rd")
+        codeview = db.codeview
+        result = codeview.find_one({"username":username})
+        if result:
+            codeview.update({"username":username},{"$set":{"view_file":relative_path}})
+        conn.disconnect()
+	
 	return {"codeData":self.codeData}
 
 

@@ -23,7 +23,9 @@ class CodeBrowserBlock(XBlock):
     CONFIG = Config.CONFIG
     git_host = CONFIG["GIT"]["HOST"]
     git_port = CONFIG["GIT"]["PORT"]
-    edx_host = CONFIG["EDX"]["HOST"]
+    edx_host = CONFIG["EDX"]["HOST"]   
+    mongo_admin = CONFIG["MONGO"]["ADMIN"]
+    mongo_pwd   = CONFIG["MONGO"]["PASSWORD"]
     
     LOG_FILE = '/var/www/gitlab_codebrowser.log'
     handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes = 1024*1024)
@@ -70,6 +72,7 @@ class CodeBrowserBlock(XBlock):
 	else:
 	    conn = pymongo.Connection('localhost', 27017)
 	    db = conn.test
+	    db.authenticate(self.mongo_admin,self.mongo_pwd)
 	    codeview = db.codeview
 	    result = codeview.find_one({"username":username})
 	    conn.disconnect()
@@ -87,6 +90,7 @@ class CodeBrowserBlock(XBlock):
 		try:
 		    conn=pymongo.Connection('localhost', 27017)
                     db = conn.test
+		    db.authenticate(self.mongo_admin,self.mongo_pwd)
                     token=db.token
 		    result = token.find_one({"username":username})
 		    if result:
@@ -164,6 +168,7 @@ class CodeBrowserBlock(XBlock):
 	src = 'http://' + self.edx_host + '/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'
 	conn = pymongo.Connection('localhost', 27017)
 	db = conn.test
+	db.authenticate(self.mongo_admin,self.mongo_pwd)
 	codeview = db.codeview
 	result = codeview.find_one({"username":username})
 	if result:
@@ -201,6 +206,7 @@ class CodeBrowserBlock(XBlock):
 	self.logger.info("edit " + username + " " + src)
     	conn = pymongo.Connection('localhost', 27017)
 	db = conn.test
+	db.authenticate(self.mongo_admin,self.mongo_pwd)
 	codeview = db.codeview
 	result = codeview.find_one({"username":username})
 	if result:

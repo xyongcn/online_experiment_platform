@@ -16,6 +16,7 @@ function JennystartXBlock(runtime, element) {
       relative_path: $("#relative_path", element).val()
     };
     $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
+      editor.setValue(response['codeData']);
     });
   });
   

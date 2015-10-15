@@ -10,12 +10,12 @@ class Config:
 	    "IMPORT_URL" : "https://github.com/chyyuu/ucore_os_lab",
 	    "PROJECT_NAME" : "ucore_lab",
             # GitLab admin account's token
-            "ADMIN_TOKEN": "XXXXXXXX",
+            "ADMIN_TOKEN": "9b7YDTxPuN9-ztwchRJ2",
 
             # Teacher account information, be used to create repo/project
             "TEACHER":
             {
-                "TOKEN": "XXXXXXXX"
+                "TOKEN": "L7Zxq6V_WXvG36wyrxt6"
             }
         },
 
@@ -48,5 +48,10 @@ class Config:
 	    "PASSWORD"      :"p@ssw0rd",
 	    "LDAP_URL"      :"ldap://10.9.17.245:389",
 	    "BASE_DN"       :"ou=Users,dc=edx,dc=com"
+	},
+	"MONGO":
+	{
+	    "ADMIN"     :"edxapp",
+	    "PASSWORD"  :"p@ssw0rd"
 	}
     }
