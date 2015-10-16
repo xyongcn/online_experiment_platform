@@ -25,3 +25,5 @@
 
     sudo /edx/bin/supervisorctl -c /edx/etc/supervisord.conf restart edxapp:
     sudo /edx/bin/supervisorctl -c /edx/etc/supervisord.conf restart edxapp_worker:
+    
+###在后台高级设置中advanced_modules添加XBlock
