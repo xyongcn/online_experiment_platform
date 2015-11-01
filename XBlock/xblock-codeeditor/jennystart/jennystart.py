@@ -41,7 +41,7 @@ class JennystartXBlock(XBlock):
         
         conn = pymongo.Connection('localhost', 27017)
         db = conn.test
-	db.authenticate("edxapp","p@ssw0rd")
+	db.authenticate("secret","secret")
         codeview = db.codeview
         result = codeview.find_one({"username":username})
         conn.disconnect()
@@ -99,7 +99,7 @@ class JennystartXBlock(XBlock):
 
 	conn = pymongo.Connection('localhost', 27017)
         db = conn.test
-        db.authenticate("edxapp","p@ssw0rd")
+        db.authenticate("secret","secret")
         codeview = db.codeview
         result = codeview.find_one({"username":username})
         if result:
@@ -141,10 +141,11 @@ class JennystartXBlock(XBlock):
  	commit_message=data['commit_message']       
         student_id=self.runtime.anonymous_student_id
         real_user=self.runtime.get_real_user(self.runtime.anonymous_student_id)
-	username = real_user.username
 	email = real_user.email
-	self.logger.info(username + " commit_to_gitlab " + commit_message)
-        os.system("/edx/var/edxapp/staticfiles/xblock-script/pushToGit.sh "  + student_id + " " + username + " " + email + " " + commit_message)
+        npos = email.find('@')
+        git_username = email[:npos]
+	self.logger.info(git_username + " commit_to_gitlab " + commit_message)
+        os.system("/edx/var/edxapp/staticfiles/xblock-script/pushToGit.sh "  + student_id + " " + git_username + " " + email + " " + commit_message)
         return {"result":True}
 
 

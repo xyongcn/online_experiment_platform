@@ -1,0 +1,44 @@
+<div class="ibm_docker_block container ibm_xblock">
+    <h2>Dockers Management</h2>
+    <div class="ibm_panel">
+	<div>
+            <button id="create_docker_btn" type="button" class="btn btn-primary">Create Docker</button>
+	    <button id="delete_docker_btn" type="button" class="btn btn-primary">Delete Docker</button>
+        </div>
+        <div class="ibm_panel_header">Dockers List</div>
+        <div class="ibm_panel_content">
+            <table class="ibm_table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>IP</th>
+			<th>Webshell</th>
+                        <th>Built Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tfoot></tfoot>
+                <tbody>
+		    {% for docker in dockers %}
+                    <tr>
+                        <td>{{ docker.name }}</td>
+                        <td>{{ docker.ip }}</td>
+			<td><a href="{{ docker.webshell }}" target="_blank" class="btn docker_terminal_btn btn-info btn-sm">Webshell</a></td>
+                        <td>{{ docker.creation_time }}</td>
+                        <td>
+                            {{ docker.status }}
+                        </td>
+                    </tr>
+		    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="ibm_panel">
+        <div>
+            <span style="color:Red" class="error-message">{{ message }}</span>
+        </div>
+        
+    </div>
+</div>

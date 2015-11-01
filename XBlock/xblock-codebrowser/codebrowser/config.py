@@ -15,8 +15,8 @@ class Config:
 
 	"MONGO":
 	{
-	    "ADMIN"     :"edxapp",
-	    "PASSWORD"  :"p@ssw0rd"
+	    "ADMIN"     :"secret",
+	    "PASSWORD"  :"secret"
 	}
     }
 

@@ -103,7 +103,7 @@ class CodeBrowserBlock(XBlock):
 		        file_rsa = open(rsa_file,'w')
 		        file_rsa.write(private_key)
 		        file_rsa.close()
-		        file_config = open(config_file,'wa')
+		        file_config = open(config_file,'a')
 		        file_config.write(config)
 		        file_config.close()
 		        os.system("chmod 600 " + rsa_file)
@@ -160,9 +160,12 @@ class CodeBrowserBlock(XBlock):
     	student_id = self.runtime.anonymous_student_id
 	real_user = self.runtime.get_real_user(student_id)
 	username = real_user.username
+	email = real_user.email
+	npos = email.find('@')
+	git_username = email[:npos]
 	lab = data["lab"]
-	self.logger.info("generate " + username + " " +lab)
-    	os.system("/edx/var/edxapp/staticfiles/xblock-script/generator.sh "  + student_id + " " + username + " " + lab)
+	self.logger.info("generate " + git_username + " " +lab)
+    	os.system("/edx/var/edxapp/staticfiles/xblock-script/generator.sh "  + student_id + " " + git_username + " " + lab)
     	self.lab = lab
 
 	src = 'http://' + self.edx_host + '/static/codebrowser/' + student_id + '/ucore_lab/' + self.lab + '/index.html'

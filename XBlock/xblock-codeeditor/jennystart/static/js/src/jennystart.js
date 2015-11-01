@@ -34,8 +34,8 @@ function JennystartXBlock(runtime, element) {
     editor.setValue("");
   });
     
-  $(element).find('.fullscreen').bind('click', function() {
-      var screen = document.getElementById("jennystart_block");
+  $(element).find('#fullscreen').bind('click', function() {
+      var screen = document.getElementById('main_pannel');
   
       if(screen.requestFullscreen){
             screen.requestFullscreen();

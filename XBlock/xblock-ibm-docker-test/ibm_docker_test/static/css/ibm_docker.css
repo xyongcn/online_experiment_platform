@@ -1,0 +1,58 @@
+/* CSS for UcDockerXBlock */
+.ibm_xblock
+{
+    width: 700px;
+    border: solid 1px #ccc;
+}
+
+.setting-textarea
+{
+    width: 100%;
+}
+
+.ibm_table
+{
+    border: solid 1px #ccc;
+}
+
+.ibm_table tbody tr
+{
+    border: solid 1px #999;
+}
+
+.ibm_table tbody tr td
+{
+    border: solid 1px #666;
+}
+
+.ibm_table thead tr
+{
+    border: solid 1px #999;
+    text-align: center;
+}
+
+.ibm_table thead tr th
+{
+    background-color: #eee;
+    border: solid 1px #666;
+    width: 200px;
+    text-align: center;
+}
+
+div.ibm_panel
+{
+    padding: 5px;
+    border: solid 1px #777;
+}
+
+div.ibm_panel_header
+{
+    background-color: Blue;
+    color: White;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+div.ibm_panel_content
+{
+}

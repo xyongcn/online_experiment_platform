@@ -1,0 +1,31 @@
+<div class="ibm_docker_block ibm_xblock">
+    <h2>Clusters Management</h2>
+    <div>
+        <table class="ibm_table">
+            <thead>
+                <tr>
+		    <th>User</th>
+                    <th>Name</th>
+		    <th>ID</th>
+		    <th>IP</th>
+                    <th>Build Time</th>
+                    <th>Status</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tfoot></tfoot>
+            <tbody>
+                {% for cluster in clusters %}
+                <tr>
+		    <td>{{ cluster.user }}</td>
+                    <td>{{ cluster.name }}</td>
+		    <td>{{ cluster.id }}</td>
+		    <td>{{ cluster.ip }}</td>
+                    <td>{{ cluster.creation_time }}</td>
+                    <td>{{ cluster.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
