@@ -25,6 +25,7 @@
         set auth=true
 
 重启mongo 
+
         sudo stop mongod
         sudo start mongod
 
