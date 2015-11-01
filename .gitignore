@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 
+# linux edit file
+*~
+*.swp
+
 # C extensions
 *.so
 
