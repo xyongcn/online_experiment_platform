@@ -1,3 +1,6 @@
+IBM平台上不使用此XBlock,使用[xblock-ibm-docker-test](https://github.com/xyongcn/online_experiment_platform/tree/master/XBlock/xblock-ibm-docker-test)
+
+
 ###uc_docker需要在OpenEdX上部署Docker,以控制另一台服务器上的Docker容器
 
 ###1.在OpenEdX上部署Docker(版本必须与Docker服务器保持一致)
