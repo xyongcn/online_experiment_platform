@@ -17,6 +17,7 @@
         db.createCollection(codeview)//用于存储用户正在浏览,编辑的文件
         db.createCollection(cluster)//用于存储docker信息
         db.createCollection(ldap)//用于存储用户的ldap信息
+        db.createCollection(ibm)//用于存储用户的ldap信息
         
 *为test数据库设置访问验证,默认任何人都能访问数据库
 
