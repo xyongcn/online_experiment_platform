@@ -2,6 +2,13 @@
 
 1.修改hosts,否则api无法访问url
 
-  vi /etc/hosts
-  #add the following code
-  172.16.10.120 crl.ptopenlab.com
+    vi /etc/hosts
+    #add the following code
+    172.16.10.120 crl.ptopenlab.com
+    
+2.XBlock安装/卸载
+
+    cd <dir of xblock>
+    sudo -u edxapp /edx/bin/pip.edxapp install .
+    sudo -u edxapp /edx/bin/pip.edxapp uninstall ibm_docker-xblock-test
+    
