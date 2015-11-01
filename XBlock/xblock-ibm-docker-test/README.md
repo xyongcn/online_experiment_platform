@@ -6,7 +6,11 @@
     #add the following code
     172.16.10.120 crl.ptopenlab.com
     
-2.XBlock安装/卸载
+2.XBlock安装的python-ldap需要依赖包如下
+
+    sudo apt-get install python-dev libldap2-dev libsasl2-dev libssl-dev
+    
+3.XBlock安装/卸载
 
     cd <dir of xblock>
     sudo -u edxapp /edx/bin/pip.edxapp install .
