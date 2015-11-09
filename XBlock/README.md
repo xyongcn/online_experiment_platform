@@ -18,6 +18,8 @@
         db.createCollection(cluster)//用于存储docker信息
         db.createCollection(ldap)//用于存储用户的ldap信息
         db.createCollection(ibm)//用于存储用户的ldap信息
+        db.createCollection(passwd_reset)//用于用户通过邮箱重设ldap密码
+        db.createCollection(global_var)//用于存储全局变量,例如当前学生编号(递增)
         
 *为test数据库设置访问验证,默认任何人都能访问数据库
 
