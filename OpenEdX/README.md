@@ -167,3 +167,10 @@ elasticsearch获取失败
     python manage.py runserver 0.0.0.0:8000&
     //浏览器访问本地8000端口即可看到XBlock的相关信息
     //创建新Xblock请使用xblock-sdk中的script/startnew.py脚本
+    
+(10)
+调整时区设置
+
+    vi /edx/app/edxapp/lms.env.json
+    vi /edx/app/edxapp/cms/env.json
+    将TIME_ZONE参数改为 Asia/Beijing
