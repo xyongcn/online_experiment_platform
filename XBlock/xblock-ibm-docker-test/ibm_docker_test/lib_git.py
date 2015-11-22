@@ -170,6 +170,9 @@ class GitLabUtil(object):
             if http_client:
                 http_client.close()
 	message = json.loads(message)
+	#check message
+	if len(message) == 0
+	    return False,"error in get user id"
         return result,message[0]
 
     @staticmethod
