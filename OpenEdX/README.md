@@ -176,4 +176,4 @@ elasticsearch获取失败
     将TIME_ZONE参数改为 Asia/Beijing
 
 (11)views.py
-用于提供用户初始化接口,与外部系统相连
+用于提供用户初始化接口,与外部系统相连,需要在/edx-platform/lms/urls.py中增加url与views.py函数中的映射
