@@ -174,3 +174,6 @@ elasticsearch获取失败
     vi /edx/app/edxapp/lms.env.json
     vi /edx/app/edxapp/cms/env.json
     将TIME_ZONE参数改为 Asia/Beijing
+
+(11)views.py
+用于提供用户初始化接口,与外部系统相连
