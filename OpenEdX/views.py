@@ -12,11 +12,6 @@ from email.mime.text import MIMEText
 import datetime
 from Crypto.Cipher import AES
 
-log = logging.getLogger("edx.student")
-AUDIT_LOG = logging.getLogger("audit")
-ReverifyInfo = namedtuple('ReverifyInfo', 'course_id course_name course_number date status display')  # pylint: disable=invalid-name
-SETTING_CHANGE_INITIATED = 'edx.user.settings.change_initiated'
-
 # add by zyu,for IBM account init
 def account_init(request):
     usrid = request.GET.get('usrid')
