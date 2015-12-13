@@ -4,8 +4,8 @@ Openedx与Gitlab上均映射了nfs:/mnt/data_backup
 
 挂载nfs：
 
-sudo apt-get install nfs-common
-sudo mount -t nfs softrepo.ptopenlab.com:/gpfs/user/tsinghua/ /mnt/data_backup
+    sudo apt-get install nfs-common
+    sudo mount -t nfs softrepo.ptopenlab.com:/gpfs/user/tsinghua/ /mnt/data_backup
 
 导出mongo数据库
 
