@@ -177,3 +177,8 @@ elasticsearch获取失败
 
 (11)views.py
 用于提供用户初始化接口,与外部系统相连,需要在/edx-platform/lms/urls.py中增加url与views.py函数中的映射
+
+views.py中用到的库:
+    
+    pip install selenium
+    //安装phantomjs-2.1.1用于自动登录gitlab并绑定shib账号。
