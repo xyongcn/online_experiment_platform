@@ -73,6 +73,13 @@ def account_init(request):
 	response += "<p>IBM supernova account:</p><p style='color:red'>" + email + "</p><p>" + result + "</p>"
 	response += "<p>shibboleth account(for edx and gitlab):</p><p style='color:red'>" + name + "</p>"
 	response += " <p>password:</p><p style='color:red'>" + password + "</p>"
+	
+	#auto sign on gitlab to bind account
+    try:
+        AutoLoginGit(name,password)
+    except Exception:
+    	response += "<p>bind gitlab account failed, please login in gitlab manually</p>"
+        
 	return HttpResponse(response)
 
 #add by zyu
@@ -224,7 +231,28 @@ def ibm_password_reset(request):
     ibm.update({"usrid":usrid,"email":email},{"$set":{"password":new_pwd}})
     conn.disconnect() 
     return render_to_response('password_reset_message.html', {'message':'password modified successfully'})
+    
+def AutoLoginGit(username,password):
+    browser = webdriver.PhantomJS(service_log_path='/tmp/ghostdriver.log')
+    #browser = webdriver.Firefox()
+    #browser.set_page_load_timeout(20)
+    #browser.implicitly_wait(10)
+    # On Windows, use: webdriver.PhantomJS('C:\phantomjs-1.9.7-windows\phantomjs.exe')
 
+    # click Shib-login button
+    browser.get("http://172.16.13.236/users/sign_in")
+    browser.find_element_by_link_text("Shibboleth").click()
+    # Fill the login form and submit it
+    browser.find_element_by_name('j_username').send_keys(username)
+    browser.find_element_by_name('j_password').send_keys(password)
+    browser.find_element_by_id('login').submit()
+
+    #alert_window = browser.switch_to_alert()
+    #alert_window.accept()
+    #time.sleep(2)
+    url = browser.current_url
+    browser.quit()
+    
 def generate_name():                                                                                                          
     conn=pymongo.Connection('localhost', 27017)
     db = conn.test                                                                                                            
