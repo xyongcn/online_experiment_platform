@@ -348,7 +348,7 @@ idp的默认端口是8080(8443用于ECP),如果使用默认端口的话,配置�
 		sudo a2ensite lms
 		/etc/init.d/apache2 restart
 
-* 复制/OpenEdX/edx_nginx/sites-available/lms 至 /etc/nginx/sites-available/
+* 复制/OpenEdX/edx_nginx/sites-available/lms 至 /edx/app/nginx/sites-available/
 * 重启Apache以及Nginx
 ```
 /etc/init.d/nginx restart & /etc/init.d/apache2 restart
