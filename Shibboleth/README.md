@@ -44,7 +44,7 @@
 <h1 id="gitlab"> 1.gitlab的安装</h1>
 ## 1.1环境
 
-    gitlab版本：GitLab CE Omnibus 
+    gitlab版本：GitLab CE 7.14.1
     
     操作系统：ubuntu 12.04 64bit
     
@@ -114,7 +114,7 @@ sudo apt-get install curl openssh-server ca-certificates postfix
 ### (3)添加gitlab 包服务并安装包
 输入下面的命令:
 ```
-curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
 ```
 出现下面的内容仓库说明己安装好：
 
@@ -122,7 +122,7 @@ curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/scrip
 
 然后输入下面的命令安装包：
  ```
- sudo apt-get install gitlab-ce
+ sudo apt-get install gitlab-ce=7.14.1-ce.0
  ```
  
  出现下面的内容说明安装好：
@@ -143,7 +143,12 @@ sudo gitlab-ctl reconfigure
 
 ### (5)登录gitlab(访问http://localhost)
   在浏览器中输入：http://localhost 如果进入到登录页面，则说明gitlab己正确安装。
-  首次访问gitlab,会直接重定向到设置密码屏幕，初始用户名是root。
+  默认管理员的账户密码：
+
+    Username: root
+    Password: 5iveL!fe 
+    
+  登录进去后直接跳到更改密码界面
   
 <h1 id="openEdx"> 2.Open edX的安装</h1>
 ## 2.1 环境
@@ -1286,3 +1291,37 @@ http://apple.cs.tsinghua.edu.cn
 IdP认证通过后，自动返回到gitlab,此时己登录进入gitlab
 
 ![gitlab-demo-2](https://github.com/jennyzhang8800/os_platform/blob/master/pictures/gitlab-demo-2.png)
+
+<hr>
+
+## 去除gitlab首页的登录和注册功能，使其只能用shibboleth登录
+
+### 1. 以管理员身份登录gitlab
+
+  如果你没有改过密码，默认的管理员账号密码为：
+  
+     Username: root
+     Password: 5iveL!fe 
+     
+### 2.进入admin area
+
+    点击右上角admin area
+    
+### 3. 进入Settings页面
+
+    点击左下角Settings
+    
+    在Sign-in Restriction区域
+
+    取消Sign-up enabled和Sign-in enabled的勾选
+      
+    保存
+ 
+![picture](https://github.com/jennyzhang8800/os_platform/blob/master/pictures/gitlab-7.14.1-signup-disable.png)
+
+### 4. 重新返回首页
+ 
+ 可以看到只能用shibbolth登录了
+ 
+ ![picture](https://github.com/jennyzhang8800/os_platform/blob/master/pictures/gitlab-signin-disbale.png)
+
