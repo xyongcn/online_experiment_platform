@@ -1,0 +1,6 @@
+#!/bin/bash -x
+# Create the user
+sudo useradd -d /home/$1 -c "$1" -m -s /bin/bash "$1"
+sudo usermod -a -G sudo "$1"
+# echo "$2" | sudo passwd "$1" --stdin
+echo -e "$2\n$2\n$2" | sudo passwd "$1"
