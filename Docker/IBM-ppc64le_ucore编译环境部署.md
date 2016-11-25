@@ -91,7 +91,7 @@ i386-elf-gcc-4.8 --version
 
 在opuser根目录放置myuseradd-ibm脚本
 
-#修改opuser执行sudo时免输入密码
+修改opuser执行sudo时免输入密码
 ```
 visudo,做如下修改
 #opuser ALL=(ALL:ALL) ALL
