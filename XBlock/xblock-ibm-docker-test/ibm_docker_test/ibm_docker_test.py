@@ -243,18 +243,18 @@ class IBMDockerTestXBlock(XBlock):
 	    cluster.set_creation_time(cluster_creation_time)
 	    self.clusters.append(cluster.object_to_dict())
 	    self.save()
-	    time.sleep(20)		
+	    time.sleep(40)		
 	
 	#create cluster is a asynchronous api,so we should read status constantly to get ip
 	#if user already have docker,the code below will update docker info
-	for i in range(12):
+	for i in range(60):
 	    try:
 	        ret = self.cluster_helper.cluster_show(self.cluster_id)
 	    except Exception:
                 #self.logger.info("fail to get ip,cluster id: " + self.cluster_id + " should try again")
-		if i == 11:
+		if i == 59:
 		    return {"result": False, "message": "time out to get ip"}
-		time.sleep(2)
+		time.sleep(10)
 		continue
 	        
 	    if ret["success"] == False:
@@ -265,7 +265,7 @@ class IBMDockerTestXBlock(XBlock):
 		return {"result": False, "message": "docker create failed"}
 	    if ret["status"] == "CREATE_COMPLETE":
 		break
-	    time.sleep(2)
+	    time.sleep(10)
 
 	cluster_ip = ret["ext_ip"]
 	self.clusters[0]["ip"] = cluster_ip
