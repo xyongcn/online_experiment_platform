@@ -16,7 +16,7 @@
     cp ./scripts/generator.sh /edx/var/edxapp/staticfiles/xblock-script/
     cp ./scripts/make.sh /edx/var/edxapp/staticfiles/xblock-script/
 
-注意:必须确保www-data用户拥有scripts中脚本的执行权限以及所创建目录的读写权限,脚本第一次运行时会连接Gitlab服务器,系统会询问是否添加fingerprint,所以要事先以edxapp用户连接一次Gitlab以添加fingerprint
+注意:必须确保www-data用户拥有scripts中脚本的执行权限以及所创建目录的读写权限,脚本第一次运行时会连接Gitlab服务器,系统会询问是否添加fingerprint,所以要事先以www-data用户连接一次Gitlab以添加fingerprint
 
     sudo -u edxapp bash
     ssh user@gitlab_ip
